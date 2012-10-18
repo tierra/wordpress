@@ -163,7 +163,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		}
 		list( $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h ) = $dims;
 
-		$resized = wp_imagecreatetruecolor( $dst_w, $dst_h );
+		$resized = wp_imagecreatetruecolor( $dst_w, $dst_h, $this->mime_type, $this->image );
 		imagecopyresampled( $resized, $this->image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h );
 
 		if ( is_resource( $resized ) ) {
@@ -241,7 +241,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 		if ( ! $dst_h )
 			$dst_h = $src_h;
 
-		$dst = wp_imagecreatetruecolor( $dst_w, $dst_h );
+		$dst = wp_imagecreatetruecolor( $dst_w, $dst_h, $this->mime_type, $this->image );
 
 		if ( $src_abs ) {
 			$src_w -= $src_x;
@@ -300,7 +300,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	public function flip( $horz, $vert ) {
 		$w = $this->size['width'];
 		$h = $this->size['height'];
-		$dst = wp_imagecreatetruecolor( $w, $h );
+		$dst = wp_imagecreatetruecolor( $w, $h, $this->mime_type, $this->image );
 
 		if ( is_resource( $dst ) ) {
 			$sx = $vert ? ($w - 1) : 0;

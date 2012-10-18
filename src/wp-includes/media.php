@@ -1221,13 +1221,33 @@ function get_taxonomies_for_attachments( $output = 'names' ) {
  *
  * @param int $width Image width
  * @param int $height Image height
+ * @param int $image_type Image type
+ * @param resource $original_image Original image
  * @return image resource
  */
-function wp_imagecreatetruecolor($width, $height) {
-	$img = imagecreatetruecolor($width, $height);
-	if ( is_resource($img) && function_exists('imagealphablending') && function_exists('imagesavealpha') ) {
-		imagealphablending($img, false);
-		imagesavealpha($img, true);
+function wp_imagecreatetruecolor( $width, $height, $image_type = null, $original_image = null ) {
+	$img = imagecreatetruecolor( $width, $height );
+	if ( ! is_resource( $img ) )
+		return false;
+
+	if( 'image/gif' === $image_type && is_resource( $original_image ) && function_exists( 'imagecolortransparent' ) ) {
+		// If the original image is GIF, we actually need a palette image.
+		imagetruecolortopalette( $img, true, 255 );
+		// Use the same palette of colors as the original image. This also
+		// needs to be done for the transparent index to be valid in the
+		// new image.
+		imagepalettecopy( $img, $original_image );
+		$transparent_index = imagecolortransparent( $original_image );
+		if ( $transparent_index >= 0 )
+		{
+			imagefill( $img, 0, 0, $transparent_index );
+			imagecolortransparent( $img, $transparent_index );
+		}
+	} elseif ( 'image/png' === $image_type && function_exists( 'imagealphablending' ) && function_exists( 'imagesavealpha' ) ) {
+		if ( function_exists( 'imagecolortransparent' ) && function_exists( 'imagecolorallocatealpha' ) )
+			imagecolortransparent( $img, imagecolorallocatealpha( $img, 0, 0, 0, 127 ) );
+		imagealphablending( $img, false );
+		imagesavealpha( $img, true );
 	}
 	return $img;
 }
