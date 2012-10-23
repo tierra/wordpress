@@ -308,7 +308,7 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 			$sw = $vert ? -$w : $w;
 			$sh = $horz ? -$h : $h;
 
-			if ( imagecopyresampled( $dst, $this->image, 0, 0, $sx, $sy, $w, $h, $sw, $sh ) ) {
+			if ( imagecopy( $dst, $this->image, 0, 0, $sx, $sy, $sw, $sh ) ) {
 				imagedestroy( $this->image );
 				$this->image = $dst;
 				return true;
