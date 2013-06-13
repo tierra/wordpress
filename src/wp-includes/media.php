@@ -1236,16 +1236,19 @@ function wp_imagecreatetruecolor( $width, $height, $image_type = null, $original
 		// Use the same palette of colors as the original image. This also
 		// needs to be done for the transparent index to be valid in the
 		// new image.
-		imagepalettecopy( $img, $original_image );
-		$transparent_index = imagecolortransparent( $original_image );
-		if ( $transparent_index >= 0 )
+		//imagepalettecopy( $img, $original_image );
+		$original_transparent_index = imagecolortransparent( $original_image );
+		if ( $original_transparent_index >= 0 )
 		{
+			$transparent_color = imagecolorsforindex( $original_image, $original_transparent_index );
+			$transparent_index = imagecolorallocate( $img, $transparent_color['red'], $transparent_color['green'], $transparent_color['blue'] );
 			imagefill( $img, 0, 0, $transparent_index );
 			imagecolortransparent( $img, $transparent_index );
+			//imagetruecolortopalette( $img, false, 255 );
 		}
 	} elseif ( 'image/png' === $image_type && function_exists( 'imagealphablending' ) && function_exists( 'imagesavealpha' ) ) {
-		if ( function_exists( 'imagecolortransparent' ) && function_exists( 'imagecolorallocatealpha' ) )
-			imagecolortransparent( $img, imagecolorallocatealpha( $img, 0, 0, 0, 127 ) );
+		//if ( function_exists( 'imagecolortransparent' ) )
+		//	imagecolortransparent( $img, imagecolortransparent( $original_image ) );
 		imagealphablending( $img, false );
 		imagesavealpha( $img, true );
 	}

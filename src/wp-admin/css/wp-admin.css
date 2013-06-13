@@ -4689,6 +4689,12 @@ borger color while dragging a file over the uploader drop area */
 
 .imgedit-wrap {
 	position: relative;
+	background-color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(-45deg, #ccc 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(45deg, transparent 75%, #ccc 75%),
+	  				  -webkit-linear-gradient(-45deg, transparent 75%, #ccc 75%);
+	background-size: 25px 25px;
 }
 
 .imgedit-settings p {
@@ -4754,6 +4760,12 @@ td.imgedit-settings input {
 .wp_attachment_image,
 .A1B1 {
 	overflow: hidden;
+	background-color: #fff;
+	background-image: -webkit-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(-45deg, #ccc 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(45deg, transparent 75%, #ccc 75%),
+	  				  -webkit-linear-gradient(-45deg, transparent 75%, #ccc 75%);
+	background-size: 25px 25px;
 }
 
 .wp_attachment_image .button,
