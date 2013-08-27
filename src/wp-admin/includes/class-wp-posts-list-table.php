@@ -1048,7 +1048,9 @@ class WP_Posts_List_Table extends WP_List_Table {
 		<p class="submit inline-edit-save">
 			<a accesskey="c" href="#inline-edit" class="button-secondary cancel alignleft"><?php _e( 'Cancel' ); ?></a>
 			<?php if ( ! $bulk ) {
-				wp_nonce_field( 'inlineeditnonce', '_inline_edit', false );
+				wp_nonce_field( array( 'action' => 'inlineeditnonce',
+									   'name' => '_inline_edit',
+									   'referrer' => false ) );
 				?>
 				<a accesskey="s" href="#inline-edit" class="button-primary save alignright"><?php _e( 'Update' ); ?></a>
 				<span class="spinner"></span>

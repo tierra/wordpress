@@ -121,7 +121,7 @@ var postboxes;
 
 			postVars = {
 				action: 'meta-box-order',
-				_ajax_nonce: $('#meta-box-order-nonce').val(),
+				_ajax_nonce: $('input[name="meta-box-order-nonce"]').val(),
 				page_columns: page_columns,
 				page: page
 			}

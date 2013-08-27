@@ -330,7 +330,7 @@ if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create
 </div>
 
 <form name="post" action="post.php" method="post" id="post"<?php do_action('post_edit_form_tag', $post); ?>>
-<?php wp_nonce_field($nonce_action); ?>
+<?php wp_nonce_field( array( 'action' => $nonce_action ) ); ?>
 <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
 <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
 <input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ) ?>" />
@@ -347,9 +347,17 @@ if ( 'draft' != get_post_status( $post ) )
 
 echo $form_extra;
 
-wp_nonce_field( 'autosave', 'autosavenonce', false );
-wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+wp_nonce_field( array( 'action'   => 'autosave',
+					   'name'     => 'autosavenonce',
+					   'id'       => 'autosavenonce',
+					   'referrer' => false ) );
+wp_nonce_field( array( 'action'   => 'meta-box-order',
+					   'name'     => 'meta-box-order-nonce',
+					   'referrer' => false ) );
+wp_nonce_field( array( 'action'   => 'closedpostboxes',
+					   'name'     => 'closedpostboxesnonce',
+					   'id'       => 'closedpostboxesnonce',
+					   'referrer' => false ) );
 ?>
 
 <?php do_action( 'edit_form_top', $post ); ?>
@@ -386,7 +394,10 @@ if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !
 ?>
 </div>
 <?php
-wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+wp_nonce_field( array( 'action'   => 'samplepermalink',
+					   'name'     => 'samplepermalinknonce',
+					   'id'       => 'samplepermalinknonce',
+					   'referrer' => false ) );
 ?>
 </div><!-- /titlediv -->
 <?php

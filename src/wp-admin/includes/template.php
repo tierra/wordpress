@@ -370,9 +370,13 @@ function wp_comment_reply($position = '1', $checkbox = false, $mode = 'single', 
 	<input type="hidden" name="checkbox" id="checkbox" value="<?php echo $checkbox ? 1 : 0; ?>" />
 	<input type="hidden" name="mode" id="mode" value="<?php echo esc_attr($mode); ?>" />
 	<?php
-		wp_nonce_field( 'replyto-comment', '_ajax_nonce-replyto-comment', false );
+		wp_nonce_field( array( 'action' => 'replyto-comment',
+							   'name' => '_ajax_nonce-replyto-comment',
+							   'referrer' => false ) );
 		if ( current_user_can( 'unfiltered_html' ) )
-			wp_nonce_field( 'unfiltered-html-comment', '_wp_unfiltered_html_comment', false );
+			wp_nonce_field( array( 'action' => 'unfiltered-html-comment',
+								   'name' => '_wp_unfiltered_html_comment',
+								   'referrer' => false ) );
 	?>
 <?php if ( $table_row ) : ?>
 </td></tr></tbody></table>
@@ -492,7 +496,9 @@ function _list_meta_row( $entry, &$count ) {
 	$r .= "\n\t\t";
 	$r .= get_submit_button( __( 'Update' ), 'updatemeta small', "meta-{$entry['meta_id']}-submit", false, array( 'data-wp-lists' => "add:the-list:meta-{$entry['meta_id']}::_ajax_nonce-add-meta=$update_nonce" ) );
 	$r .= "</div>";
-	$r .= wp_nonce_field( 'change-meta', '_ajax_nonce', false, false );
+	$r .= wp_nonce_field( array( 'action' => 'change-meta', // Where is this nonce field actually checked? Doesn't look like it's used anywhere.
+								 'name' => '_ajax_nonce', 'id' => '_ajax_nonce',
+								 'referrer' => false, 'echo' => false ) );
 	$r .= "</td>";
 
 	$r .= "\n\t\t<td><label class='screen-reader-text' for='meta[{$entry['meta_id']}][value]'>" . __( 'Value' ) . "</label><textarea name='meta[{$entry['meta_id']}][value]' id='meta[{$entry['meta_id']}][value]' rows='2' cols='30'>{$entry['meta_value']}</textarea></td>\n\t</tr>";
@@ -556,7 +562,9 @@ function meta_form() {
 <div class="submit">
 <?php submit_button( __( 'Add Custom Field' ), 'secondary', 'addmeta', false, array( 'id' => 'newmeta-submit', 'data-wp-lists' => 'add:the-list:newmeta' ) ); ?>
 </div>
-<?php wp_nonce_field( 'add-meta', '_ajax_nonce-add-meta', false ); ?>
+<?php wp_nonce_field( array( 'action' => 'add-meta',
+							 'name' => '_ajax_nonce-add-meta',
+							 'referrer' => false ) ); ?>
 </td></tr>
 </tbody>
 </table>
@@ -1346,7 +1354,9 @@ function find_posts_div($found_action = '') {
 				<?php } ?>
 
 				<input type="hidden" name="affected" id="affected" value="" />
-				<?php wp_nonce_field( 'find-posts', '_ajax_nonce', false ); ?>
+				<?php wp_nonce_field( array( 'action' => 'find-posts',
+											 'name' => '_ajax_nonce',
+											 'referrer' => false ) ); ?>
 				<label class="screen-reader-text" for="find-posts-input"><?php _e( 'Search' ); ?></label>
 				<input type="text" id="find-posts-input" name="ps" value="" />
 				<span class="spinner"></span>

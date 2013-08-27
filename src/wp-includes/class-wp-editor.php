@@ -833,7 +833,10 @@ final class _WP_Editors {
 	?>
 	<div style="display:none;">
 	<form id="wp-link" tabindex="-1">
-	<?php wp_nonce_field( 'internal-linking', '_ajax_linking_nonce', false ); ?>
+	<?php wp_nonce_field( array( 'action' => 'internal-linking',
+								 'name' => '_ajax_linking_nonce',
+								 'id' => '_ajax_linking_nonce',
+								 'referrer' => false ) ); ?>
 	<div id="link-selector">
 		<div id="link-options">
 			<p class="howto"><?php _e( 'Enter the destination URL' ); ?></p>

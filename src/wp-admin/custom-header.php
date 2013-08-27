@@ -520,7 +520,8 @@ class Custom_Image_Header {
 		<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
 		<input type="file" id="upload" name="import" />
 		<input type="hidden" name="action" value="save" />
-		<?php wp_nonce_field( 'custom-header-upload', '_wpnonce-custom-header-upload' ); ?>
+		<?php wp_nonce_field( array( 'action' => 'custom-header-upload',
+									 'name' => '_wpnonce-custom-header-upload' ) ); ?>
 		<?php submit_button( __( 'Upload' ), 'button', 'submit', false ); ?>
 	</p>
 	<?php
@@ -635,7 +636,8 @@ if ( current_theme_supports( 'custom-header', 'default-text-color' ) ) {
 
 do_action( 'custom_header_options' );
 
-wp_nonce_field( 'custom-header-options', '_wpnonce-custom-header-options' ); ?>
+wp_nonce_field( array( 'action' => 'custom-header-options',
+					   'name' => '_wpnonce-custom-header-options' ) ); ?>
 
 <?php submit_button( null, 'primary', 'save-header-options' ); ?>
 </form>
@@ -729,7 +731,7 @@ wp_nonce_field( 'custom-header-options', '_wpnonce-custom-header-options' ); ?>
 	<?php if ( empty( $_POST ) && isset( $_GET['file'] ) ) { ?>
 	<input type="hidden" name="create-new-attachment" value="true" />
 	<?php } ?>
-	<?php wp_nonce_field( 'custom-header-crop-image' ) ?>
+	<?php wp_nonce_field( array( 'action' => 'custom-header-crop-image' ) ); ?>
 
 	<p class="submit">
 	<?php submit_button( __( 'Crop and Publish' ), 'primary', 'submit', false ); ?>

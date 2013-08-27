@@ -30,7 +30,7 @@ columns = {
 		$.post(ajaxurl, {
 			action: 'hidden-columns',
 			hidden: hidden,
-			screenoptionnonce: $('#screenoptionnonce').val(),
+			screenoptionnonce: $('input[name="screenoptionnonce"]').val(),
 			page: pagenow
 		});
 	},

@@ -130,7 +130,8 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 	}
 
 	function display() {
-		wp_nonce_field( "fetch-list-" . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_nonce_field( array( 'action' => 'fetch-list-' . get_class( $this ),
+							   'name' => '_ajax_fetch_list_nonce' ) );
 ?>
 		<div class="tablenav top themes">
 			<div class="alignleft actions">

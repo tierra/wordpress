@@ -439,7 +439,9 @@ function post_categories_meta_box( $post, $box ) {
 					</label>
 					<?php wp_dropdown_categories( array( 'taxonomy' => $taxonomy, 'hide_empty' => 0, 'name' => 'new'.$taxonomy.'_parent', 'orderby' => 'name', 'hierarchical' => 1, 'show_option_none' => '&mdash; ' . $tax->labels->parent_item . ' &mdash;' ) ); ?>
 					<input type="button" id="<?php echo $taxonomy; ?>-add-submit" data-wp-lists="add:<?php echo $taxonomy ?>checklist:<?php echo $taxonomy ?>-add" class="button category-add-submit" value="<?php echo esc_attr( $tax->labels->add_new_item ); ?>" />
-					<?php wp_nonce_field( 'add-'.$taxonomy, '_ajax_nonce-add-'.$taxonomy, false ); ?>
+					<?php wp_nonce_field( array( 'action' => 'add-'.$taxonomy,
+												 'name' => '_ajax_nonce-add-'.$taxonomy,
+												 'referrer' => false ) ); ?>
 					<span id="<?php echo $taxonomy; ?>-ajax-response"></span>
 				</p>
 			</div>
@@ -553,7 +555,9 @@ function post_comment_meta_box_thead($result) {
 function post_comment_meta_box( $post ) {
 	global $wpdb;
 
-	wp_nonce_field( 'get-comments', 'add_comment_nonce', false );
+	wp_nonce_field( array( 'action' => 'get-comments',
+						   'name' => 'add_comment_nonce',
+						   'referrer' => false ) );
 	?>
 	<p class="hide-if-no-js" id="add-new-comment"><a href="#commentstatusdiv" onclick="commentReply.addcomment(<?php echo $post->ID; ?>);return false;"><?php _e('Add comment'); ?></a></p>
 	<?php
@@ -771,7 +775,9 @@ function link_categories_meta_box($link) {
 			<label class="screen-reader-text" for="newcat"><?php _e( '+ Add New Category' ); ?></label>
 			<input type="text" name="newcat" id="newcat" class="form-required form-input-tip" value="<?php esc_attr_e( 'New category name' ); ?>" aria-required="true" />
 			<input type="button" id="link-category-add-submit" data-wp-lists="add:categorychecklist:link-category-add" class="button" value="<?php esc_attr_e( 'Add' ); ?>" />
-			<?php wp_nonce_field( 'add-link-category', '_ajax_nonce', false ); ?>
+			<?php wp_nonce_field( array( 'action' => 'add-link-category',
+										 'name' => '_ajax_nonce',
+										 'referrer' => false ) ); ?>
 			<span id="category-ajax-response"></span>
 		</p>
 	</div>

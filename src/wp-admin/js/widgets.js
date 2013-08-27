@@ -180,7 +180,7 @@ wpWidgets = {
 
 		var a = {
 			action: 'widgets-order',
-			savewidgets: $('#_wpnonce_widgets').val(),
+			savewidgets: $('input[name="_wpnonce_widgets"]').val(),
 			sidebars: []
 		};
 
@@ -203,7 +203,7 @@ wpWidgets = {
 
 		a = {
 			action: 'save-widget',
-			savewidgets: $('#_wpnonce_widgets').val(),
+			savewidgets: $('input[name="_wpnonce_widgets"]').val(),
 			sidebar: sb
 		};
 

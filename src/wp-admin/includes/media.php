@@ -1655,7 +1655,7 @@ function media_upload_type_form($type = 'file', $errors = null, $id = null) {
 <form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="<?php echo $type; ?>-form">
 <?php submit_button( '', 'hidden', 'save', false ); ?>
 <input type="hidden" name="post_id" id="post_id" value="<?php echo (int) $post_id; ?>" />
-<?php wp_nonce_field('media-form'); ?>
+<?php wp_nonce_field( array( 'action' => 'media-form' ) ); ?>
 
 <h3 class="media-title"><?php _e('Add media files from your computer'); ?></h3>
 
@@ -1719,7 +1719,7 @@ function media_upload_type_url_form($type = null, $errors = null, $id = null) {
 
 <form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="<?php echo $type; ?>-form">
 <input type="hidden" name="post_id" id="post_id" value="<?php echo (int) $post_id; ?>" />
-<?php wp_nonce_field('media-form'); ?>
+<?php wp_nonce_field( array( 'action' => 'media-form' ) ); ?>
 
 <h3 class="media-title"><?php _e('Insert media from another website'); ?></h3>
 
@@ -1869,7 +1869,7 @@ jQuery(function($){
 <a href="#" id="clear"><?php _ex('Clear', 'verb'); ?></a>
 </div>
 <form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="gallery-form">
-<?php wp_nonce_field('media-form'); ?>
+<?php wp_nonce_field( array( 'action' => 'media-form' ) ); ?>
 <?php //media_upload_form( $errors ); ?>
 <table class="widefat" cellspacing="0">
 <thead><tr>
@@ -2111,7 +2111,7 @@ foreach ($arc_result as $arc_row) {
 
 <form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="library-form">
 
-<?php wp_nonce_field('media-form'); ?>
+<?php wp_nonce_field( array( 'action' => 'media-form' ) ); ?>
 <?php //media_upload_form( $errors ); ?>
 
 <script type="text/javascript">

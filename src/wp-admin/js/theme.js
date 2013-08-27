@@ -148,7 +148,7 @@ jQuery( document ).ready( function($) {
  * @uses ajaxurl
  * @uses list_args
  * @uses theme_list_args
- * @uses $('#_ajax_fetch_list_nonce').val()
+ * @uses $('input[name="_ajax_fetch_list_nonce"]').val()"
 * */
 var ThemeScroller;
 (function($){
@@ -176,7 +176,7 @@ var ThemeScroller;
 			}
 
 			// Handle inputs
-			this.nonce = $('#_ajax_fetch_list_nonce').val();
+			this.nonce = $('input[name="_ajax_fetch_list_nonce"]').val();
 			this.nextPage = ( theme_list_args.paged + 1 );
 
 			// Cache jQuery selectors

@@ -797,7 +797,7 @@ var wpNavMenu;
 		attachThemeLocationsListeners : function() {
 			var loc = $('#nav-menu-theme-locations'), params = {};
 			params['action'] = 'menu-locations-save';
-			params['menu-settings-column-nonce'] = $('#menu-settings-column-nonce').val();
+			params['menu-settings-column-nonce'] = $('input[name="menu-settings-column-nonce"]').val();
 			loc.find('input[type="submit"]').click(function() {
 				loc.find('select').each(function() {
 					params[this.name] = $(this).val();
@@ -841,7 +841,7 @@ var wpNavMenu;
 				'action': 'menu-quick-search',
 				'response-format': 'markup',
 				'menu': $('#menu').val(),
-				'menu-settings-column-nonce': $('#menu-settings-column-nonce').val(),
+				'menu-settings-column-nonce': $('input[name="menu-settings-column-nonce"]').val(),
 				'q': q,
 				'type': input.attr('name')
 			};
@@ -888,7 +888,7 @@ var wpNavMenu;
 
 		addItemToMenu : function(menuItem, processMethod, callback) {
 			var menu = $('#menu').val(),
-				nonce = $('#menu-settings-column-nonce').val();
+				nonce = $('input[name="menu-settings-column-nonce"]').val();
 
 			processMethod = processMethod || function(){};
 			callback = callback || function(){};

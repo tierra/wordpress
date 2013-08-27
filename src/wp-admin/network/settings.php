@@ -82,7 +82,7 @@ if ( isset( $_GET['updated'] ) ) {
 	<?php screen_icon('options-general'); ?>
 	<h2><?php echo esc_html( $title ); ?></h2>
 	<form method="post" action="settings.php">
-		<?php wp_nonce_field( 'siteoptions' ); ?>
+		<?php wp_nonce_field( array( 'action' => 'siteoptions' ) ); ?>
 		<h3><?php _e( 'Operational Settings' ); ?></h3>
 		<table class="form-table">
 			<tr valign="top">

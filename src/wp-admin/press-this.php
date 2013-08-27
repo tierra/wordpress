@@ -447,7 +447,7 @@ $admin_body_class .= ' locale-' . sanitize_html_class( strtolower( str_replace( 
 <div id="poststuff" class="metabox-holder">
 	<div id="side-sortables" class="press-this-sidebar">
 		<div class="sleeve">
-			<?php wp_nonce_field('press-this') ?>
+			<?php wp_nonce_field( array( 'action' => 'press-this' ) ); ?>
 			<input type="hidden" name="post_type" id="post_type" value="text"/>
 			<input type="hidden" name="autosave" id="autosave" />
 			<input type="hidden" id="original_post_status" name="original_post_status" value="draft" />
@@ -532,7 +532,9 @@ $admin_body_class .= ' locale-' . sanitize_html_class( strtolower( str_replace( 
 								</label>
 								<?php wp_dropdown_categories( array( 'taxonomy' => 'category', 'hide_empty' => 0, 'name' => 'newcategory_parent', 'orderby' => 'name', 'hierarchical' => 1, 'show_option_none' => '&mdash; ' . $tax->labels->parent_item . ' &mdash;' ) ); ?>
 								<input type="button" id="category-add-submit" data-wp-lists="add:categorychecklist:category-add" class="button category-add-submit" value="<?php echo esc_attr( $tax->labels->add_new_item ); ?>" />
-								<?php wp_nonce_field( 'add-category', '_ajax_nonce-add-category', false ); ?>
+								<?php wp_nonce_field( array( 'action' => 'add-category',
+															 'name' => '_ajax_nonce-add-category',
+															 'referrer' => false ) ); ?>
 								<span id="category-ajax-response"></span>
 							</p>
 						</div>

@@ -191,7 +191,7 @@ if ( $comment->comment_approved != '0' ) { // if not unapproved
 </tr>
 </table>
 
-<?php wp_nonce_field( $nonce_action ); ?>
+<?php wp_nonce_field( array( 'action' => $nonce_action ) ); ?>
 <input type='hidden' name='action' value='<?php echo esc_attr($formaction); ?>' />
 <input type='hidden' name='c' value='<?php echo esc_attr($comment->comment_ID); ?>' />
 <input type='hidden' name='noredir' value='1' />

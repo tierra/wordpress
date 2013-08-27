@@ -268,7 +268,8 @@ if ( is_multisite() ) {
 ?>
 <form action="" method="post" name="adduser" id="adduser" class="validate"<?php do_action('user_new_form_tag');?>>
 <input name="action" type="hidden" value="adduser" />
-<?php wp_nonce_field( 'add-user', '_wpnonce_add-user' ) ?>
+<?php wp_nonce_field( array( 'action' => 'add-user',
+							 'name'   => '_wpnonce_add-user' ) ); ?>
 
 <table class="form-table">
 	<tr class="form-field form-required">
@@ -301,7 +302,8 @@ if ( current_user_can( 'create_users') ) {
 <p><?php _e('Create a brand new user and add them to this site.'); ?></p>
 <form action="" method="post" name="createuser" id="createuser" class="validate"<?php do_action('user_new_form_tag');?>>
 <input name="action" type="hidden" value="createuser" />
-<?php wp_nonce_field( 'create-user', '_wpnonce_create-user' ) ?>
+<?php wp_nonce_field( array( 'action' => 'create-user',
+							 'name' => '_wpnonce_create-user' ) ); ?>
 <?php
 // Load up the passed data, else set to a default.
 foreach ( array( 'user_login' => 'login', 'first_name' => 'firstname', 'last_name' => 'lastname',

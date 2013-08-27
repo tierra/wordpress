@@ -198,7 +198,7 @@ if ( $allowed_files ) :
 	echo '<div class="error"><p>' . __('Oops, no such file exists! Double check the name and try again, merci.') . '</p></div>';
 else : ?>
 	<form name="template" id="template" action="theme-editor.php" method="post">
-	<?php wp_nonce_field( 'edit-theme_' . $file . $stylesheet ); ?>
+	<?php wp_nonce_field( array( 'action' => 'edit-theme_' . $file . $stylesheet ) ); ?>
 		<div><textarea cols="70" rows="30" name="newcontent" id="newcontent" aria-describedby="newcontent-description"><?php echo $content; ?></textarea>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="file" value="<?php echo esc_attr( $relative_file ); ?>" />

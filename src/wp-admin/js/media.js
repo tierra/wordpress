@@ -48,7 +48,7 @@ var findPosts;
 			var post = {
 					ps: $('#find-posts-input').val(),
 					action: 'find_posts',
-					_ajax_nonce: $('#_ajax_nonce').val()
+					_ajax_nonce: $('input[name="_ajax_nonce"]').val()
 				},
 				spinner = $( '.find-box-search .spinner' );
 

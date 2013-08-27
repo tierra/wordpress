@@ -78,7 +78,7 @@ if ( isset( $_GET['action'] ) ) {
 					<input type="hidden" name="action" value="<?php echo esc_attr( $_GET['action2'] ) ?>" />
 					<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 					<input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr( wp_get_referer() ); ?>" />
-					<?php wp_nonce_field( $_GET['action2'], '_wpnonce', false ); ?>
+					<?php wp_nonce_field( array( 'action' => $_GET['action2'], 'referrer' => false ) ); ?>
 					<p><?php echo esc_html( wp_unslash( $_GET['msg'] ) ); ?></p>
 					<?php submit_button( __('Confirm'), 'button' ); ?>
 				</form>

@@ -120,7 +120,8 @@ if ( ! empty( $messages ) ) {
 		echo '<div id="message" class="updated"><p>' . $msg . '</p></div>';
 } ?>
 <form method="post" action="<?php echo network_admin_url('site-new.php?action=add-site'); ?>">
-<?php wp_nonce_field( 'add-blog', '_wpnonce_add-blog' ) ?>
+<?php wp_nonce_field( array( 'action' => 'add-blog',
+							 'name'   => '_wpnonce_add-blog' ) ); ?>
 	<table class="form-table">
 		<tr class="form-field form-required">
 			<th scope="row"><?php _e( 'Site Address' ) ?></th>

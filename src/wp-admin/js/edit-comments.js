@@ -263,7 +263,7 @@ setCommentsList = function() {
 		args = $.extend(args, {
 			'action': 'fetch-list',
 			'list_args': list_args,
-			'_ajax_fetch_list_nonce': $('#_ajax_fetch_list_nonce').val()
+			'_ajax_fetch_list_nonce': $('input[name="_ajax_fetch_list_nonce"]').val()
 		});
 
 		$.ajax({

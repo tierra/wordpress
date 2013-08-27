@@ -28,7 +28,7 @@ function confirm_delete_users( $users ) {
 	<form action="users.php?action=dodelete" method="post">
 	<input type="hidden" name="dodelete" />
 	<?php
-	wp_nonce_field( 'ms-users-delete' );
+	wp_nonce_field( array( 'action' => 'ms-users-delete' ) );
 	$site_admins = get_super_admins();
 	$admin_out = "<option value='$current_user->ID'>$current_user->user_login</option>";
 

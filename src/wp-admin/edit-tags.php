@@ -354,7 +354,8 @@ if ( current_user_can($tax->cap->edit_terms) ) {
 <input type="hidden" name="screen" value="<?php echo esc_attr($current_screen->id); ?>" />
 <input type="hidden" name="taxonomy" value="<?php echo esc_attr($taxonomy); ?>" />
 <input type="hidden" name="post_type" value="<?php echo esc_attr($post_type); ?>" />
-<?php wp_nonce_field('add-tag', '_wpnonce_add-tag'); ?>
+<?php wp_nonce_field( array( 'action' => 'add-tag',
+							 'name'   => '_wpnonce_add-tag' ) ); ?>
 
 <div class="form-field form-required">
 	<label for="tag-name"><?php _ex('Name', 'Taxonomy Name'); ?></label>

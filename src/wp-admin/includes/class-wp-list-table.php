@@ -760,7 +760,7 @@ class WP_List_Table {
 	 */
 	function display_tablenav( $which ) {
 		if ( 'top' == $which )
-			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+			wp_nonce_field( array( 'action' => 'bulk-' . $this->_args['plural'] ) );
 ?>
 	<div class="tablenav <?php echo esc_attr( $which ); ?>">
 

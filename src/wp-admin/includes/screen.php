@@ -991,7 +991,9 @@ final class WP_Screen {
 		echo $this->_screen_settings;
 
 		?>
-		<div><?php wp_nonce_field( 'screen-options-nonce', 'screenoptionnonce', false ); ?></div>
+		<div><?php wp_nonce_field( array( 'action' => 'screen-options-nonce',
+										  'name' => 'screenoptionnonce',
+										  'referrer' => false ) ); ?></div>
 		</form>
 		</div>
 		<?php

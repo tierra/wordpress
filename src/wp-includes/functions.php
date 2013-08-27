@@ -1186,34 +1186,65 @@ function wp_nonce_url( $actionurl, $action = -1, $name = '_wpnonce' ) {
  * offer absolute protection, but should protect against most cases. It is very
  * important to use nonce field in forms.
  *
- * The $action and $name are optional, but if you want to have better security,
- * it is strongly suggested to set those two parameters. It is easier to just
+ * The following optional settings can be used with this method:
+ *
+ * action - A unique name included in the nonce hash (for better security).
+ * name - The input field name, defaults to "_wpnonce".
+ * id - Used as the input element id if desired.
+ * referrer - Referrer field is used for validation, defaults to true.
+ * echo - Output is displayed, defaults to true. Returns the output if false.
+ *
+ * While action is optional, it is strongly recommended to set this option to a
+ * unique value for every form for better security. It is easier to just
  * call the function without any parameters, because validation of the nonce
- * doesn't require any parameters, but since crackers know what the default is
+ * doesn't require any parameters, but since crackers know what the default is,
  * it won't be difficult for them to find a way around your nonce and cause
  * damage.
- *
- * The input name will be whatever $name value you gave. The input value will be
- * the nonce creation value.
  *
  * @package WordPress
  * @subpackage Security
  * @since 2.0.4
  *
- * @param string $action Optional. Action name.
- * @param string $name Optional. Nonce name.
- * @param bool $referer Optional, default true. Whether to set the referer field for validation.
- * @param bool $echo Optional, default true. Whether to display or return hidden form field.
- * @return string Nonce field.
+ * @param array $options Optional settings for the nonce field, see description.
+ *
+ * @return string HTML nonce field to be used in a form.
  */
-function wp_nonce_field( $action = -1, $name = "_wpnonce", $referer = true , $echo = true ) {
-	$name = esc_attr( $name );
-	$nonce_field = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="' . wp_create_nonce( $action ) . '" />';
+function wp_nonce_field( $options = array() ) {
+	$defaults = array(
+		'action'   => -1,
+		'name'     => '_wpnonce',
+		'id'       => '',
+		'referrer' => true,
+		'echo'     => true
+	);
 
-	if ( $referer )
+	// WordPress 3.5 compatibility layer:
+	// Arguments: $action = -1, $name = "_wpnonce", $referer = true, $echo = true
+	// The $name parameter was also used for id.
+	if ( ! is_array( $options ) || 0 == func_num_args() ) {
+		_deprecated_argument( __FUNCTION__, '3.6', 'Please see the documentation on how to pass the necessary options to this function.' );
+		$old_args = func_get_args();
+		$options = array( 'name' => '_wpnonce' );
+		if ( isset( $old_args[0] ) ) $options['action']   = $old_args[0];
+		if ( isset( $old_args[1] ) ) $options['name']     = $old_args[1];
+		if ( isset( $old_args[2] ) ) $options['referrer'] = $old_args[2];
+		if ( isset( $old_args[3] ) ) $options['echo']     = $old_args[3];
+		$options['id'] = $options['name'];
+	}
+
+	$options = wp_parse_args( $options, $defaults );
+
+	$nonce_field = '<input type="hidden"';
+	if ( ! empty( $options['id'] ) ) {
+		$nonce_field .= ' id="' . esc_attr( $options['id'] ) . '"';
+	}
+	$nonce_field .= ' name="' . esc_attr( $options['name'] ) . '"';
+	$nonce_field .= ' value="' . esc_attr( wp_create_nonce( $options['action'] ) ) . '" />';
+
+	if ( $options['referrer'] )
 		$nonce_field .= wp_referer_field( false );
 
-	if ( $echo )
+	if ( $options['echo'] )
 		echo $nonce_field;
 
 	return $nonce_field;

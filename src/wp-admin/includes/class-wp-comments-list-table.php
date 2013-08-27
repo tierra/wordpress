@@ -231,7 +231,6 @@ class WP_Comments_List_Table extends WP_List_Table {
 		}
 
 		if ( ( 'spam' == $comment_status || 'trash' == $comment_status ) && current_user_can( 'moderate_comments' ) ) {
-			wp_nonce_field( 'bulk-destroy', '_destroy_nonce' );
 			$title = ( 'spam' == $comment_status ) ? esc_attr__( 'Empty Spam' ) : esc_attr__( 'Empty Trash' );
 			submit_button( $title, 'apply', 'delete_all', false );
 		}
@@ -273,7 +272,8 @@ class WP_Comments_List_Table extends WP_List_Table {
 	function display() {
 		extract( $this->_args );
 
-		wp_nonce_field( "fetch-list-" . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_nonce_field( array( 'action' => 'fetch-list-' . get_class( $this ),
+							   'name' => '_ajax_fetch_list_nonce' ) );
 
 		$this->display_tablenav( 'top' );
 
@@ -545,7 +545,8 @@ class WP_Post_Comments_List_Table extends WP_Comments_List_Table {
 	function display( $output_empty = false ) {
 		extract( $this->_args );
 
-		wp_nonce_field( "fetch-list-" . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_nonce_field( array( 'action' => 'fetch-list-' . get_class( $this ),
+							   'name' => '_ajax_fetch_list_nonce' ) );
 ?>
 <table class="<?php echo implode( ' ', $this->get_table_classes() ); ?>" cellspacing="0" style="display:none;">
 	<tbody id="the-comment-list"<?php if ( $singular ) echo " data-wp-lists='list:$singular'"; ?>>

@@ -183,7 +183,8 @@ function wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_
 function _wp_dashboard_control_callback( $dashboard, $meta_box ) {
 	echo '<form action="" method="post" class="dashboard-widget-control-form">';
 	wp_dashboard_trigger_widget_control( $meta_box['id'] );
-	wp_nonce_field( 'edit-dashboard-widget_' . $meta_box['id'], 'dashboard-widget-nonce' );
+	wp_nonce_field( array( 'action' => 'edit-dashboard-widget_' . $meta_box['id'],
+						   'name' => 'dashboard-widget-nonce' ) );
 	echo '<input type="hidden" name="widget_id" value="' . esc_attr($meta_box['id']) . '" />';
 	submit_button( __('Submit') );
 	echo '</form>';
@@ -215,8 +216,13 @@ function wp_dashboard() {
 </div>
 
 <?php
-	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+	wp_nonce_field( array( 'action' => 'closedpostboxes',
+						   'name' => 'closedpostboxesnonce',
+						   'id' => 'closedpostboxesnonce',
+						   'referrer' => false ) );
+	wp_nonce_field( array( 'action'   => 'meta-box-order',
+						   'name'     => 'meta-box-order-nonce',
+						   'referrer' => false ) );
 
 }
 
@@ -557,7 +563,7 @@ function wp_dashboard_quick_press() {
 			<input type="hidden" name="action" id="quickpost-action" value="post-quickpress-save" />
 			<input type="hidden" name="post_ID" value="<?php echo $post_ID; ?>" />
 			<input type="hidden" name="post_type" value="post" />
-			<?php wp_nonce_field('add-post'); ?>
+			<?php wp_nonce_field( array( 'action' => 'add-post' ) ); ?>
 			<?php submit_button( __( 'Save Draft' ), 'button', 'save', false, array( 'id' => 'save-post' ) ); ?>
 			<input type="reset" value="<?php esc_attr_e( 'Reset' ); ?>" class="button" />
 			<br class="clear" />

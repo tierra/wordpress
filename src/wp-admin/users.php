@@ -214,7 +214,7 @@ case 'delete':
 	include ('admin-header.php');
 ?>
 <form action="" method="post" name="updateusers" id="updateusers">
-<?php wp_nonce_field('delete-users') ?>
+<?php wp_nonce_field( array( 'action' => 'delete-users' ) ); ?>
 <?php echo $referer; ?>
 
 <div class="wrap">
@@ -319,7 +319,7 @@ case 'remove':
 	include ('admin-header.php');
 ?>
 <form action="" method="post" name="updateusers" id="updateusers">
-<?php wp_nonce_field('remove-users') ?>
+<?php wp_nonce_field( array( 'action' => 'remove-users' ) ); ?>
 <?php echo $referer; ?>
 
 <div class="wrap">

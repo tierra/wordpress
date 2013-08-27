@@ -178,7 +178,7 @@ include('./admin-header.php'); ?>
 <?php screen_icon(); ?>
   <h2><?php esc_html_e('All Settings'); ?></h2>
   <form name="form" action="options.php" method="post" id="all-options">
-  <?php wp_nonce_field('options-options') ?>
+  <?php wp_nonce_field( array( 'action' => 'options-options' ) ); ?>
   <input type="hidden" name="action" value="update" />
   <input type='hidden' name='option_page' value='options' />
   <table class="form-table">

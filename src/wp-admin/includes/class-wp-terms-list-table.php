@@ -366,7 +366,9 @@ class WP_Terms_List_Table extends WP_List_Table {
 			<a accesskey="s" href="#inline-edit" class="save button-primary alignright"><?php echo $tax->labels->update_item; ?></a>
 			<span class="spinner"></span>
 			<span class="error" style="display:none;"></span>
-			<?php wp_nonce_field( 'taxinlineeditnonce', '_inline_edit', false ); ?>
+			<?php wp_nonce_field( array( 'action' => 'taxinlineeditnonce',
+										 'name' => '_inline_edit',
+										 'referrer' => false ) ); ?>
 			<input type="hidden" name="taxonomy" value="<?php echo esc_attr( $this->screen->taxonomy ); ?>" />
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( $this->screen->post_type ); ?>" />
 			<br class="clear" />

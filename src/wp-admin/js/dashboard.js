@@ -8,7 +8,7 @@ jQuery(document).ready( function($) {
 			$.post( ajaxurl, {
 				action: 'update-welcome-panel',
 				visible: visible,
-				welcomepanelnonce: $('#welcomepanelnonce').val()
+				welcomepanelnonce: $('input[name="welcomepanelnonce"]').val()
 			});
 		};
 

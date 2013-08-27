@@ -118,7 +118,9 @@ $today = current_time('mysql', 1);
 		$classes .= ' hidden'; ?>
 
  	<div id="welcome-panel" class="<?php echo esc_attr( $classes ); ?>">
- 		<?php wp_nonce_field( 'welcome-panel-nonce', 'welcomepanelnonce', false ); ?>
+ 		<?php wp_nonce_field( array( 'action'   => 'welcome-panel-nonce',
+									 'name'     => 'welcomepanelnonce',
+									 'referrer' => false ) ); ?>
 		<a class="welcome-panel-close" href="<?php echo esc_url( admin_url( '?welcome=0' ) ); ?>"><?php _e( 'Dismiss' ); ?></a>
 		<?php do_action( 'welcome_panel' ); ?>
 	</div>

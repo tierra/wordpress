@@ -294,7 +294,7 @@ if ( $action ) {
 						foreach ( (array) $plugins as $plugin )
 							echo '<input type="hidden" name="checked[]" value="' . esc_attr($plugin) . '" />';
 					?>
-					<?php wp_nonce_field('bulk-plugins') ?>
+					<?php wp_nonce_field( array( 'action' => 'bulk-plugins' ) ); ?>
 					<?php submit_button( $data_to_delete ? __( 'Yes, Delete these files and data' ) : __( 'Yes, Delete these files' ), 'button', 'submit', false ); ?>
 				</form>
 				<form method="post" action="<?php echo esc_url(wp_get_referer()); ?>" style="display:inline;">

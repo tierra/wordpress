@@ -190,7 +190,7 @@ commentsBox = {
 		data = {
 			'action' : 'get-comments',
 			'mode' : 'single',
-			'_ajax_nonce' : $('#add_comment_nonce').val(),
+			'_ajax_nonce' : $('input[name="add_comment_nonce"]').val(),
 			'p' : $('#post_ID').val(),
 			'start' : st,
 			'number' : num

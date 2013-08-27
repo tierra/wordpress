@@ -111,7 +111,7 @@ else :
 	}?>
 	</table>
 	<input type="hidden" name="action" value="updateblogsettings" />
-	<?php wp_nonce_field( 'update-my-sites' ); ?>
+	<?php wp_nonce_field( array( 'action' => 'update-my-sites' ) ); ?>
 	<?php submit_button(); ?>
 	</form>
 <?php endif; ?>

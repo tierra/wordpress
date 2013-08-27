@@ -281,7 +281,7 @@ if ( isset($_GET['editwidget']) && $_GET['editwidget'] ) {
 	<input type="hidden" name="widget-id" class="widget-id" value="<?php echo esc_attr($widget_id); ?>" />
 	<input type="hidden" name="id_base" class="id_base" value="<?php echo esc_attr($id_base); ?>" />
 	<input type="hidden" name="multi_number" class="multi_number" value="<?php echo esc_attr($multi_number); ?>" />
-<?php	wp_nonce_field("save-delete-widget-$widget_id"); ?>
+	<?php wp_nonce_field( array( 'action' => "save-delete-widget-$widget_id" ) ); ?>
 	<br class="clear" />
 	</div>
 	</form>
@@ -389,7 +389,9 @@ foreach ( $wp_registered_sidebars as $sidebar => $registered_sidebar ) {
 </div>
 </div>
 <form action="" method="post">
-<?php wp_nonce_field( 'save-sidebar-widgets', '_wpnonce_widgets', false ); ?>
+<?php wp_nonce_field( array( 'action' => 'save-sidebar-widgets',
+							 'name' => '_wpnonce_widgets',
+							 'referrer' => false ) ); ?>
 </form>
 <br class="clear" />
 </div>

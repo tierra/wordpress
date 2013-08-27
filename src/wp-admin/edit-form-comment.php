@@ -11,7 +11,7 @@ if ( !defined('ABSPATH') )
 	die('-1');
 ?>
 <form name="post" action="comment.php" method="post" id="post">
-<?php wp_nonce_field('update-comment_' . $comment->comment_ID) ?>
+<?php wp_nonce_field( array( 'action' => 'update-comment_' . $comment->comment_ID, 'id' => '_wpnonce' ) ); ?>
 <div class="wrap">
 <?php screen_icon(); ?>
 <h2><?php _e('Edit Comment'); ?></h2>
@@ -65,7 +65,11 @@ if ( !defined('ABSPATH') )
 <?php
 	$quicktags_settings = array( 'buttons' => 'strong,em,link,block,del,ins,img,ul,ol,li,code,close' );
 	wp_editor( $comment->comment_content, 'content', array( 'media_buttons' => false, 'tinymce' => false, 'quicktags' => $quicktags_settings ) );
-	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
+	wp_nonce_field( array( 'action'   => 'closedpostboxes',
+						   'name'     => 'closedpostboxesnonce',
+						   'id'       => 'closedpostboxesnonce',
+						   'referrer' => false ) );
+	?>
 </div>
 </div><!-- /post-body-content -->
 

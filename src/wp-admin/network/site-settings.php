@@ -104,7 +104,7 @@ if ( ! empty( $messages ) ) {
 		echo '<div id="message" class="updated"><p>' . $msg . '</p></div>';
 } ?>
 <form method="post" action="site-settings.php?action=update-site">
-	<?php wp_nonce_field( 'edit-site' ); ?>
+	<?php wp_nonce_field( array( 'action' => 'edit-site' ) ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $id ) ?>" />
 	<table class="form-table">
 		<?php

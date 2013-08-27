@@ -267,7 +267,8 @@ endif; ?>
 			</select></td>
 		</tr>
 	</table>
-	<?php wp_nonce_field( 'add-user', '_wpnonce_add-user' ) ?>
+	<?php wp_nonce_field( array( 'action' => 'add-user',
+								 'name'   => '_wpnonce_add-user' ) ); ?>
 	<?php submit_button( __( 'Add User' ), 'primary', 'add-user', true, array( 'id' => 'submit-add-existing-user' ) ); ?>
 </form>
 <?php endif; ?>
@@ -301,7 +302,8 @@ endif; ?>
 			<td colspan="2"><?php _e( 'Username and password will be mailed to the above email address.' ) ?></td>
 		</tr>
 	</table>
-	<?php wp_nonce_field( 'add-user', '_wpnonce_add-new-user' ) ?>
+	<?php wp_nonce_field( array( 'action' => 'add-user',
+								 'name'   => '_wpnonce_add-new-user' ) ); ?>
 	<?php submit_button( __( 'Add New User' ), 'primary', 'add-user', true, array( 'id' => 'submit-add-user' ) ); ?>
 </form>
 <?php endif; ?>

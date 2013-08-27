@@ -224,7 +224,8 @@ if ( get_background_image() ) {
 <th scope="row"><?php _e('Remove Image'); ?></th>
 <td>
 <form method="post" action="">
-<?php wp_nonce_field('custom-background-remove', '_wpnonce-custom-background-remove'); ?>
+<?php wp_nonce_field( array( 'action' => 'custom-background-remove',
+							 'name' => '_wpnonce-custom-background-remove' ) ); ?>
 <?php submit_button( __( 'Remove Background Image' ), 'button', 'remove-background', false ); ?><br/>
 <?php _e('This will remove the background image. You will not be able to restore any customizations.') ?>
 </form>
@@ -238,7 +239,8 @@ if ( get_background_image() ) {
 <th scope="row"><?php _e('Restore Original Image'); ?></th>
 <td>
 <form method="post" action="">
-<?php wp_nonce_field('custom-background-reset', '_wpnonce-custom-background-reset'); ?>
+<?php wp_nonce_field( array( 'action' => 'custom-background-reset',
+							 'name' => '_wpnonce-custom-background-reset' ) ); ?>
 <?php submit_button( __( 'Restore Original Image' ), 'button', 'reset-background', false ); ?><br/>
 <?php _e('This will restore the original background image. You will not be able to restore any customizations.') ?>
 </form>
@@ -253,7 +255,8 @@ if ( get_background_image() ) {
 		<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
 		<input type="file" id="upload" name="import" />
 		<input type="hidden" name="action" value="save" />
-		<?php wp_nonce_field( 'custom-background-upload', '_wpnonce-custom-background-upload' ); ?>
+		<?php wp_nonce_field( array( 'action' => 'custom-background-upload',
+									 'name' => '_wpnonce-custom-background-upload' ) ); ?>
 		<?php submit_button( __( 'Upload' ), 'button', 'submit', false ); ?>
 	</p>
 	<p>
@@ -329,7 +332,7 @@ if ( current_theme_supports( 'custom-background', 'default-color' ) )
 </tbody>
 </table>
 
-<?php wp_nonce_field('custom-background'); ?>
+<?php wp_nonce_field( array( 'action' => 'custom-background' ) ); ?>
 <?php submit_button( null, 'primary', 'save-background-options' ); ?>
 </form>
 

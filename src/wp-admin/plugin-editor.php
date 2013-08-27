@@ -223,7 +223,7 @@ foreach ( $plugin_files as $plugin_file ) :
 	</ul>
 </div>
 <form name="template" id="template" action="plugin-editor.php" method="post">
-	<?php wp_nonce_field('edit-plugin_' . $file) ?>
+	<?php wp_nonce_field( array( 'action' => 'edit-plugin_' . $file ) ); ?>
 		<div><textarea cols="70" rows="25" name="newcontent" id="newcontent" aria-describedby="newcontent-description"><?php echo $content; ?></textarea>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="file" value="<?php echo esc_attr($file) ?>" />

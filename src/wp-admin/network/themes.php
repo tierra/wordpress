@@ -154,7 +154,7 @@ if ( $action ) {
 						foreach ( (array) $themes as $theme )
 							echo '<input type="hidden" name="checked[]" value="' . esc_attr($theme) . '" />';
 					?>
-					<?php wp_nonce_field('bulk-themes') ?>
+					<?php wp_nonce_field( array( 'action' => 'bulk-themes' ) ); ?>
 					<?php submit_button( _n( 'Yes, Delete this theme', 'Yes, Delete these themes', $themes_to_delete ), 'button', 'submit', false ); ?>
 				</form>
 				<form method="post" action="<?php echo esc_url(wp_get_referer()); ?>" style="display:inline;">

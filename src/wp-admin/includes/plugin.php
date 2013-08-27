@@ -1762,5 +1762,5 @@ function remove_option_whitelist( $del_options, $options = '' ) {
 function settings_fields($option_group) {
 	echo "<input type='hidden' name='option_page' value='" . esc_attr($option_group) . "' />";
 	echo '<input type="hidden" name="action" value="update" />';
-	wp_nonce_field("$option_group-options");
+	wp_nonce_field( array( 'action' => "$option_group-options" ) );
 }

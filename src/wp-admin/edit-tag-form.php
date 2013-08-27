@@ -34,7 +34,7 @@ do_action($taxonomy . '_pre_edit_form', $tag, $taxonomy); ?>
 <input type="hidden" name="action" value="editedtag" />
 <input type="hidden" name="tag_ID" value="<?php echo esc_attr($tag->term_id) ?>" />
 <input type="hidden" name="taxonomy" value="<?php echo esc_attr($taxonomy) ?>" />
-<?php wp_original_referer_field(true, 'previous'); wp_nonce_field('update-tag_' . $tag_ID); ?>
+<?php wp_original_referer_field(true, 'previous'); wp_nonce_field( array( 'action' => 'update-tag_' . $tag_ID ) ); ?>
 	<table class="form-table">
 		<tr class="form-field form-required">
 			<th scope="row" valign="top"><label for="name"><?php _ex('Name', 'Taxonomy Name'); ?></label></th>

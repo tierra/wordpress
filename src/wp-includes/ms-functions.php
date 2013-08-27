@@ -1584,7 +1584,9 @@ function upload_is_file_too_big( $upload ) {
 function signup_nonce_fields() {
 	$id = mt_rand();
 	echo "<input type='hidden' name='signup_form_id' value='{$id}' />";
-	wp_nonce_field('signup_form_' . $id, '_signup_form', false);
+	wp_nonce_field( array( 'action' => 'signup_form_' . $id,
+						   'name'=> '_signup_form',
+						   'referrer' => false ) );
 }
 
 /**

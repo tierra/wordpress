@@ -71,9 +71,14 @@ if ( !empty($form) )
 if ( !empty($link_added) )
 	echo $link_added;
 
-wp_nonce_field( $nonce_action );
-wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
+wp_nonce_field( array( 'action' => $nonce_action ) );
+wp_nonce_field( array( 'action'   => 'closedpostboxes',
+					   'name'     => 'closedpostboxesnonce',
+					   'id'       => 'closedpostboxesnonce',
+					   'referrer' => false ) );
+wp_nonce_field( array( 'action'   => 'meta-box-order',
+					   'name'     => 'meta-box-order-nonce',
+					   'referrer' => false ) ); ?>
 
 <div id="poststuff">
 

@@ -128,7 +128,7 @@ if ( current_user_can( 'upload_files' ) ) { ?>
 <input type="hidden" name="attachment_id" id="attachment_id" value="<?php echo esc_attr($att_id); ?>" />
 <input type="hidden" name="action" value="editattachment" />
 <?php wp_original_referer_field(true, 'previous'); ?>
-<?php wp_nonce_field('media-form'); ?>
+<?php wp_nonce_field( array( 'action' => 'media-form' ) ); ?>
 
 </form>
 
