@@ -49,7 +49,7 @@ if ( $action ) {
 			exit;
 			break;
 		case 'enable-selected':
-			check_admin_referer('bulk-themes');
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 			$themes = isset( $_POST['checked'] ) ? (array) $_POST['checked'] : array();
 			if ( empty($themes) ) {
 				wp_safe_redirect( add_query_arg( 'error', 'none', $referer ) );
@@ -62,7 +62,7 @@ if ( $action ) {
 			exit;
 			break;
 		case 'disable-selected':
-			check_admin_referer('bulk-themes');
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 			$themes = isset( $_POST['checked'] ) ? (array) $_POST['checked'] : array();
 			if ( empty($themes) ) {
 				wp_safe_redirect( add_query_arg( 'error', 'none', $referer ) );
@@ -75,7 +75,7 @@ if ( $action ) {
 			exit;
 			break;
 		case 'update-selected' :
-			check_admin_referer( 'bulk-themes' );
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 
 			if ( isset( $_GET['themes'] ) )
 				$themes = explode( ',', $_GET['themes'] );
@@ -104,7 +104,7 @@ if ( $action ) {
 		case 'delete-selected':
 			if ( ! current_user_can( 'delete_themes' ) )
 				wp_die( __('You do not have sufficient permissions to delete themes for this site.') );
-			check_admin_referer( 'bulk-themes' );
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 
 			$themes = isset( $_REQUEST['checked'] ) ? (array) $_REQUEST['checked'] : array();
 

@@ -71,7 +71,7 @@ if ( !empty($form) )
 if ( !empty($link_added) )
 	echo $link_added;
 
-wp_nonce_field( $nonce_action );
+wp_nonce_field( $nonce_action, '_wpnonce-edit-link' );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 

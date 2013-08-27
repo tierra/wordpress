@@ -65,7 +65,7 @@ if ( $action ) {
 			if ( ! current_user_can('activate_plugins') )
 				wp_die(__('You do not have sufficient permissions to activate plugins for this site.'));
 
-			check_admin_referer('bulk-plugins');
+			check_admin_referer( 'bulk-plugins', '_wpnonce-bulk-plugins' );
 
 			$plugins = isset( $_POST['checked'] ) ? (array) $_POST['checked'] : array();
 
@@ -101,7 +101,7 @@ if ( $action ) {
 			break;
 		case 'update-selected' :
 
-			check_admin_referer( 'bulk-plugins' );
+			check_admin_referer( 'bulk-plugins', '_wpnonce-bulk-plugins' );
 
 			if ( isset( $_GET['plugins'] ) )
 				$plugins = explode( ',', $_GET['plugins'] );
@@ -174,7 +174,7 @@ if ( $action ) {
 			if ( ! current_user_can('activate_plugins') )
 				wp_die(__('You do not have sufficient permissions to deactivate plugins for this site.'));
 
-			check_admin_referer('bulk-plugins');
+			check_admin_referer( 'bulk-plugins', '_wpnonce-bulk-plugins' );
 
 			$plugins = isset( $_POST['checked'] ) ? (array) $_POST['checked'] : array();
 			// Do not deactivate plugins which are already deactivated.
@@ -205,7 +205,7 @@ if ( $action ) {
 			if ( ! current_user_can('delete_plugins') )
 				wp_die(__('You do not have sufficient permissions to delete plugins for this site.'));
 
-			check_admin_referer('bulk-plugins');
+			check_admin_referer( 'bulk-plugins', '_wpnonce-bulk-plugins' );
 
 			//$_POST = from the plugin form; $_GET = from the FTP details screen.
 			$plugins = isset( $_REQUEST['checked'] ) ? (array) $_REQUEST['checked'] : array();

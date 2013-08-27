@@ -1207,6 +1207,9 @@ function wp_nonce_url( $actionurl, $action = -1, $name = '_wpnonce' ) {
  * @return string Nonce field.
  */
 function wp_nonce_field( $action = -1, $name = "_wpnonce", $referer = true , $echo = true ) {
+	if ( 1 >= func_num_args() )
+		_doing_it_wrong( __METHOD__, __( 'The action and name parameters are now required.' ), '3.6' );
+
 	$name = esc_attr( $name );
 	$nonce_field = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="' . wp_create_nonce( $action ) . '" />';
 

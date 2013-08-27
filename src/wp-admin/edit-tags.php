@@ -94,7 +94,7 @@ case 'delete':
 break;
 
 case 'bulk-delete':
-	check_admin_referer( 'bulk-tags' );
+	check_admin_referer( 'bulk-tags', '_wpnonce-bulk-tags' );
 
 	if ( !current_user_can( $tax->cap->delete_terms ) )
 		wp_die( __( 'Cheatin&#8217; uh?' ) );
@@ -133,7 +133,7 @@ break;
 
 case 'editedtag':
 	$tag_ID = (int) $_POST['tag_ID'];
-	check_admin_referer( 'update-tag_' . $tag_ID );
+	check_admin_referer( 'update-tag_' . $tag_ID, '_wpnonce-edit-tag' );
 
 	if ( !current_user_can( $tax->cap->edit_terms ) )
 		wp_die( __( 'Cheatin&#8217; uh?' ) );

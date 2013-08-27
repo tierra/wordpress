@@ -28,7 +28,7 @@ $this_file = admin_url('link-manager.php');
 
 switch ($action) {
 	case 'deletebookmarks' :
-		check_admin_referer('bulk-bookmarks');
+		check_admin_referer( 'bulk-bookmarks', '_wpnonce-bulk-bookmarks' );
 
 		//for each link id (in $linkcheck[]) change category to selected value
 		if (count($linkcheck) == 0) {
@@ -49,7 +49,7 @@ switch ($action) {
 		break;
 
 	case 'move' :
-		check_admin_referer('bulk-bookmarks');
+		check_admin_referer( 'bulk-bookmarks', '_wpnonce-bulk-bookmarks' );
 
 		//for each link id (in $linkcheck[]) change category to selected value
 		if (count($linkcheck) == 0) {
@@ -65,7 +65,7 @@ switch ($action) {
 		break;
 
 	case 'add' :
-		check_admin_referer('add-bookmark');
+		check_admin_referer( 'add-bookmark', '_wpnonce-edit-link' );
 
 		$redir = wp_get_referer();
 		if ( add_link() )
@@ -77,7 +77,7 @@ switch ($action) {
 
 	case 'save' :
 		$link_id = (int) $_POST['link_id'];
-		check_admin_referer('update-bookmark_' . $link_id);
+		check_admin_referer( 'update-bookmark_' . $link_id, '_wpnonce-edit-link' );
 
 		edit_link($link_id);
 

@@ -46,7 +46,7 @@ if ( 'post' != $post_type ) {
 $doaction = $wp_list_table->current_action();
 
 if ( $doaction ) {
-	check_admin_referer('bulk-posts');
+	check_admin_referer( 'bulk-posts', '_wpnonce-bulk-posts' );
 
 	$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
 	if ( ! $sendback )

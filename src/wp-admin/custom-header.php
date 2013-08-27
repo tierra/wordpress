@@ -149,7 +149,7 @@ class Custom_Image_Header {
 		$step = (int) $_GET['step'];
 		if ( $step < 1 || 3 < $step ||
 			( 2 == $step && ! wp_verify_nonce( $_REQUEST['_wpnonce-custom-header-upload'], 'custom-header-upload' ) ) ||
-			( 3 == $step && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'custom-header-crop-image' ) )
+			( 3 == $step && ! wp_verify_nonce( $_REQUEST['_wpnonce-custom-header-crop-image'], 'custom-header-crop-image' ) )
 		)
 			return 1;
 
@@ -729,7 +729,7 @@ wp_nonce_field( 'custom-header-options', '_wpnonce-custom-header-options' ); ?>
 	<?php if ( empty( $_POST ) && isset( $_GET['file'] ) ) { ?>
 	<input type="hidden" name="create-new-attachment" value="true" />
 	<?php } ?>
-	<?php wp_nonce_field( 'custom-header-crop-image' ) ?>
+	<?php wp_nonce_field( 'custom-header-crop-image', '_wpnonce-custom-header-crop-image' ) ?>
 
 	<p class="submit">
 	<?php submit_button( __( 'Crop and Publish' ), 'primary', 'submit', false ); ?>
@@ -787,7 +787,7 @@ wp_nonce_field( 'custom-header-options', '_wpnonce-custom-header-options' ); ?>
 	 * @since 2.1.0
 	 */
 	function step_3() {
-		check_admin_referer( 'custom-header-crop-image' );
+		check_admin_referer( 'custom-header-crop-image', '_wpnonce-custom-header-crop-image' );
 
 		if ( ! current_theme_supports( 'custom-header', 'uploads' ) )
 			wp_die( __( 'Cheatin&#8217; uh?' ) );

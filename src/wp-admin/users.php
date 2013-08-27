@@ -98,7 +98,7 @@ switch ( $wp_list_table->current_action() ) {
 
 /* Bulk Dropdown menu Role changes */
 case 'promote':
-	check_admin_referer('bulk-users');
+	check_admin_referer( 'bulk-users', '_wpnonce-bulk-users' );
 
 	if ( ! current_user_can( 'promote_users' ) )
 		wp_die( __( 'You can&#8217;t edit that user.' ) );
@@ -194,7 +194,7 @@ case 'delete':
 	if ( is_multisite() )
 		wp_die( __('User deletion is not allowed from this screen.') );
 
-	check_admin_referer('bulk-users');
+	check_admin_referer( 'bulk-users', '_wpnonce-bulk-users' );
 
 	if ( empty($_REQUEST['users']) && empty($_REQUEST['user']) ) {
 		wp_redirect($redirect);
@@ -298,7 +298,7 @@ break;
 
 case 'remove':
 
-	check_admin_referer('bulk-users');
+	check_admin_referer( 'bulk-users', '_wpnonce-bulk-users' );
 
 	if ( ! is_multisite() )
 		wp_die( __( 'You can&#8217;t remove users.' ) );

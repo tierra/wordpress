@@ -72,7 +72,7 @@ jQuery(document).ready( function($) {
 			async: false,
 			data: {
 				action: 'wp-remove-post-lock',
-				_wpnonce: $('#_wpnonce').val(),
+				_wpnonce: $('input[name="edit_form_advanced_nonce"]').val(),
 				post_ID: $('#post_ID').val(),
 				active_post_lock: $('#active_post_lock').val()
 			}

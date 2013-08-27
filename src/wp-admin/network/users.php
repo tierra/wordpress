@@ -117,7 +117,7 @@ if ( isset( $_GET['action'] ) ) {
 				wp_die( __( 'You do not have permission to access this page.' ) );
 
 			if ( ( isset( $_POST['action']) || isset($_POST['action2'] ) ) && isset( $_POST['allusers'] ) ) {
-				check_admin_referer( 'bulk-users-network' );
+				check_admin_referer( 'bulk-users-network', '_wpnonce-bulk-users-network' );
 
 				$doaction = $_POST['action'] != -1 ? $_POST['action'] : $_POST['action2'];
 				$userfunction = '';

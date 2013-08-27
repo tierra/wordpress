@@ -17,7 +17,7 @@ $pagenum = $wp_list_table->get_pagenum();
 $doaction = $wp_list_table->current_action();
 
 if ( $doaction ) {
-	check_admin_referer( 'bulk-comments' );
+	check_admin_referer( 'bulk-comments', '_wpnonce-bulk-comments' );
 
 	if ( 'delete_all' == $doaction && !empty( $_REQUEST['pagegen_timestamp'] ) ) {
 		$comment_status = wp_unslash( $_REQUEST['comment_status'] );

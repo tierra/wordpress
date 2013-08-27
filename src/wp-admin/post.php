@@ -100,7 +100,7 @@ case 'postajaxpost':
 case 'post':
 case 'post-quickpress-publish':
 case 'post-quickpress-save':
-	check_admin_referer('add-' . $post_type);
+	check_admin_referer( 'add-' . $post_type, '_wpnonce-add-' . $post_type );
 
 	if ( 'post-quickpress-publish' == $action )
 		$_POST['publish'] = 'publish'; // tell write_post() to publish

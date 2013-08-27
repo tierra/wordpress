@@ -330,7 +330,7 @@ if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create
 </div>
 
 <form name="post" action="post.php" method="post" id="post"<?php do_action('post_edit_form_tag', $post); ?>>
-<?php wp_nonce_field($nonce_action); ?>
+<?php wp_nonce_field( $nonce_action, 'edit_form_advanced_nonce' ); ?>
 <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
 <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
 <input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ) ?>" />

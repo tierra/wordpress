@@ -329,7 +329,7 @@ if ( current_theme_supports( 'custom-background', 'default-color' ) )
 </tbody>
 </table>
 
-<?php wp_nonce_field('custom-background'); ?>
+<?php wp_nonce_field( 'custom-background', '_wpnonce-custom-background-save-options' ); ?>
 <?php submit_button( null, 'primary', 'save-background-options' ); ?>
 </form>
 

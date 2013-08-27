@@ -83,7 +83,7 @@ if ( $action ) {
 				unset( $allowed_themes[$theme] );
 			break;
 		case 'enable-selected':
-			check_admin_referer( 'bulk-themes' );
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 			if ( isset( $_POST['checked'] ) ) {
 				$themes = (array) $_POST['checked'];
 				$action = 'enabled';
@@ -96,7 +96,7 @@ if ( $action ) {
 			}
 			break;
 		case 'disable-selected':
-			check_admin_referer( 'bulk-themes' );
+			check_admin_referer( 'bulk-themes', '_wpnonce-bulk-themes' );
 			if ( isset( $_POST['checked'] ) ) {
 				$themes = (array) $_POST['checked'];
 				$action = 'disabled';

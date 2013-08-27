@@ -17,7 +17,7 @@ $wp_list_table = _get_list_table('WP_Links_List_Table');
 $doaction = $wp_list_table->current_action();
 
 if ( $doaction && isset( $_REQUEST['linkcheck'] ) ) {
-	check_admin_referer( 'bulk-bookmarks' );
+	check_admin_referer( 'bulk-bookmarks', '_wpnonce-bulk-bookmarks' );
 
 	if ( 'delete' == $doaction ) {
 		$bulklinks = (array) $_REQUEST['linkcheck'];

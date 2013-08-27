@@ -191,7 +191,7 @@ if ( $comment->comment_approved != '0' ) { // if not unapproved
 </tr>
 </table>
 
-<?php wp_nonce_field( $nonce_action ); ?>
+<?php wp_nonce_field( $nonce_action, $nonce_action ); ?>
 <input type='hidden' name='action' value='<?php echo esc_attr($formaction); ?>' />
 <input type='hidden' name='c' value='<?php echo esc_attr($comment->comment_ID); ?>' />
 <input type='hidden' name='noredir' value='1' />
@@ -274,7 +274,7 @@ case 'editedcomment' :
 	$comment_id = absint( $_POST['comment_ID'] );
 	$comment_post_id = absint( $_POST['comment_post_ID'] );
 
-	check_admin_referer( 'update-comment_' . $comment_id );
+	check_admin_referer( 'update-comment_' . $comment_id, '_wpnonce-update-comment' );
 
 	edit_comment();
 

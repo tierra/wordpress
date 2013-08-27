@@ -759,8 +759,10 @@ class WP_List_Table {
 	 * @access protected
 	 */
 	function display_tablenav( $which ) {
-		if ( 'top' == $which )
-			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+		if ( 'top' == $which ) {
+			$nonce_action = 'bulk-' . $this->_args['plural'];
+			wp_nonce_field( $nonce_action, '_wpnonce-' . $nonce_action );
+		}
 ?>
 	<div class="tablenav <?php echo esc_attr( $which ); ?>">
 

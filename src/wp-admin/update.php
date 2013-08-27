@@ -23,7 +23,7 @@ if ( isset($_GET['action']) ) {
 		if ( ! current_user_can( 'update_plugins' ) )
 			wp_die( __( 'You do not have sufficient permissions to update plugins for this site.' ) );
 
-		check_admin_referer( 'bulk-update-plugins' );
+		check_admin_referer( 'bulk-update-plugins', '_wpnonce-bulk-update-plugins' );
 
 		if ( isset( $_GET['plugins'] ) )
 			$plugins = explode( ',', stripslashes($_GET['plugins']) );
@@ -170,7 +170,7 @@ if ( isset($_GET['action']) ) {
 		if ( ! current_user_can( 'update_themes' ) )
 			wp_die( __( 'You do not have sufficient permissions to update themes for this site.' ) );
 
-		check_admin_referer( 'bulk-update-themes' );
+		check_admin_referer( 'bulk-update-themes', '_wpnonce-bulk-update-themes' );
 
 		if ( isset( $_GET['themes'] ) )
 			$themes = explode( ',', stripslashes($_GET['themes']) );
