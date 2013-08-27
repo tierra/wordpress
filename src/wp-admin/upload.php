@@ -36,6 +36,11 @@ if ( $doaction ) {
 			$location = remove_query_arg( array( 'trashed', 'untrashed', 'deleted', 'message', 'ids', 'posted' ), $referer );
 	}
 
+	$errors = array();
+
+	// Escape item titles displayed in error messages.
+	add_filter( 'the_title', 'esc_html' );
+
 	switch ( $doaction ) {
 		case 'find_detached':
 			if ( !current_user_can('edit_posts') )
@@ -92,39 +97,78 @@ if ( $doaction ) {
 			}
 			break;
 		case 'trash':
-			if ( !isset( $post_ids ) )
+			if ( ! isset( $post_ids ) )
 				break;
 			foreach ( (array) $post_ids as $post_id ) {
-				if ( !current_user_can( 'delete_post', $post_id ) )
-					wp_die( __( 'You are not allowed to move this post to the trash.' ) );
+				if ( ! current_user_can( 'delete_post', $post_id ) )
+					$errors[] = sprintf( __( 'You are not allowed to move "%s" to the trash.' ), get_the_title( $post_id ) );
 
-				if ( !wp_trash_post( $post_id ) )
-					wp_die( __( 'Error in moving to trash.' ) );
+				if ( ! wp_trash_post( $post_id ) )
+					$errors[] = sprintf( __( 'There was a problem moving "%s" to the trash.' ), get_the_title( $post_id ) );
 			}
+
+			if ( ! empty( $errors ) ) {
+				$wp_err = new WP_Error();
+				if ( count( $errors ) <= 10 ) {
+					foreach ( $errors as $err )
+						$wp_err->add( 'bulk_media_trash_error', $err );
+				} else {
+					$wp_err->add( 'bulk_media_trash_error', sprintf( __( 'There was a problem moving %d items to the trash.' ), count( $errors ) ) );
+				}
+				wp_die( $wp_err );
+			}
+
 			$location = add_query_arg( array( 'trashed' => count( $post_ids ), 'ids' => join( ',', $post_ids ) ), $location );
 			break;
 		case 'untrash':
-			if ( !isset( $post_ids ) )
+			if ( ! isset( $post_ids ) )
 				break;
 			foreach ( (array) $post_ids as $post_id ) {
-				if ( !current_user_can( 'delete_post', $post_id ) )
-					wp_die( __( 'You are not allowed to move this post out of the trash.' ) );
+				if ( ! current_user_can( 'delete_post', $post_id ) )
+					$errors[] = sprintf( __( 'You are not allowed to move "%s" out of the trash.' ), get_the_title( $post_id ) );
 
-				if ( !wp_untrash_post( $post_id ) )
-					wp_die( __( 'Error in restoring from trash.' ) );
+				if ( ! wp_untrash_post( $post_id ) )
+					$errors[] = sprintf( __( 'There was a problem restoring "%s" from the trash.' ), get_the_title( $post_id ) );
 			}
+
+			if ( ! empty( $errors ) ) {
+				$wp_err = new WP_Error();
+				if ( count( $errors ) <= 10 ) {
+					foreach ( $errors as $err )
+						$wp_err->add( 'bulk_media_untrash_error', $err );
+				} else {
+					$wp_err->add( 'bulk_media_untrash_error', sprintf( __( 'There was a problem restoring %d items from the trash.' ), count( $errors ) ) );
+				}
+				wp_die( $wp_err );
+			}
+
 			$location = add_query_arg( 'untrashed', count( $post_ids ), $location );
 			break;
 		case 'delete':
-			if ( !isset( $post_ids ) )
+			if ( ! isset( $post_ids ) )
 				break;
 			foreach ( (array) $post_ids as $post_id_del ) {
-				if ( !current_user_can( 'delete_post', $post_id_del ) )
-					wp_die( __( 'You are not allowed to delete this post.' ) );
+				if ( ! get_post( $post_id_del ) )
+					continue;
 
-				if ( !wp_delete_attachment( $post_id_del ) )
-					wp_die( __( 'Error in deleting.' ) );
+				if ( ! current_user_can( 'delete_post', $post_id_del ) )
+					$errors[] = sprintf( __( 'You are not allowed to delete "%s".' ), get_the_title( $post_id_del ) );
+
+				if ( ! wp_delete_attachment( $post_id_del ) )
+					$errors[] = sprintf( __( 'There was a problem deleting "%s".' ), get_the_title( $post_id_del ) );
 			}
+
+			if ( ! empty( $errors ) ) {
+				$wp_err = new WP_Error();
+				if ( count( $errors ) <= 10 ) {
+					foreach ( $errors as $err )
+						$wp_err->add( 'bulk_media_delete_error', $err );
+				} else {
+					$wp_err->add( 'bulk_media_delete_error', sprintf( __( 'There was a problem deleting %d items.' ), count( $errors ) ) );
+				}
+				wp_die( $wp_err );
+			}
+
 			$location = add_query_arg( 'deleted', count( $post_ids ), $location );
 			break;
 	}
