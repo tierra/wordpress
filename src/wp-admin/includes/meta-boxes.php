@@ -741,6 +741,7 @@ if ( !empty($_GET['action']) && 'edit' == $_GET['action'] && current_user_can('m
  * @param object $link
  */
 function link_categories_meta_box($link) {
+	$taxonomy = get_taxonomy( 'link_category' );
 ?>
 <div id="taxonomy-linkcategory" class="categorydiv">
 	<ul id="category-tabs" class="category-tabs">
@@ -765,16 +766,18 @@ function link_categories_meta_box($link) {
 		</ul>
 	</div>
 
-	<div id="category-adder" class="wp-hidden-children">
-		<h4><a id="category-add-toggle" href="#category-add"><?php _e( '+ Add New Category' ); ?></a></h4>
-		<p id="link-category-add" class="wp-hidden-child">
-			<label class="screen-reader-text" for="newcat"><?php _e( '+ Add New Category' ); ?></label>
-			<input type="text" name="newcat" id="newcat" class="form-required form-input-tip" value="<?php esc_attr_e( 'New category name' ); ?>" aria-required="true" />
-			<input type="button" id="link-category-add-submit" data-wp-lists="add:categorychecklist:link-category-add" class="button" value="<?php esc_attr_e( 'Add' ); ?>" />
-			<?php wp_nonce_field( 'add-link-category', '_ajax_nonce', false ); ?>
-			<span id="category-ajax-response"></span>
-		</p>
-	</div>
+	<?php if ( current_user_can( $taxonomy->cap->manage_terms ) ) : ?>
+		<div id="category-adder" class="wp-hidden-children">
+			<h4><a id="category-add-toggle" href="#category-add"><?php _e( '+ Add New Category' ); ?></a></h4>
+			<p id="link-category-add" class="wp-hidden-child">
+				<label class="screen-reader-text" for="newcat"><?php _e( '+ Add New Category' ); ?></label>
+				<input type="text" name="newcat" id="newcat" class="form-required form-input-tip" value="<?php esc_attr_e( 'New category name' ); ?>" aria-required="true" />
+				<input type="button" id="link-category-add-submit" data-wp-lists="add:categorychecklist:link-category-add" class="button" value="<?php esc_attr_e( 'Add' ); ?>" />
+				<?php wp_nonce_field( 'add-link-category', '_ajax_nonce', false ); ?>
+				<span id="category-ajax-response"></span>
+			</p>
+		</div>
+	<?php endif; ?>
 </div>
 <?php
 }
