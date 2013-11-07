@@ -57,7 +57,7 @@ function login_header($title = 'Log In', $message = '', $wp_error = '') {
 		add_action( 'login_head', 'wp_shake_js', 12 );
 
 	?><!DOCTYPE html>
-	<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+	<html <?php language_attributes(); ?>>
 	<head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> &rsaquo; <?php echo $title; ?></title>

@@ -10,7 +10,7 @@ require_once( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/wp-load.p
 header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?>>
 <head>
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
 <title><?php _e('Rich Editor Help'); ?></title>
