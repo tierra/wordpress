@@ -26,9 +26,21 @@ class Tests_Ajax_DimComment extends WP_Ajax_UnitTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
+
+		// Turn off comment notifications for tests.
+		update_option( 'comments_notify', 0 );
+
 		$post_id = $this->factory->post->create();
 		$this->_comments = $this->factory->comment->create_post_comments( $post_id, 15 );
 		$this->_comments = array_map( 'get_comment', $this->_comments );
+	}
+
+	/**
+	 * Reset default settings.
+	 */
+	public function tearDown() {
+		// Turn comment notifications back on.
+		update_option( 'comments_notify', 1 );
 	}
 
 	/**
