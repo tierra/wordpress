@@ -1,13 +1,15 @@
 <?php
-require_once( ABSPATH . '/wp-includes/class-phpmailer.php' );
+require_once( ABSPATH . '/wp-includes/PHPMailer/PHPMailerAutoload.php' );
 
 class MockPHPMailer extends PHPMailer {
 	var $mock_sent = array();
 
-	// override the Send function so it doesn't actually send anything
-	function Send() {
+	/**
+	 * Override send() so mail isn't actually sent.
+	 */
+	function send() {
 		try {
-			if ( ! $this->PreSend() )
+			if ( ! $this->preSend() )
 				return false;
 
 			$this->mock_sent[] = array(
