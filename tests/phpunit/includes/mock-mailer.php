@@ -1,5 +1,5 @@
 <?php
-require_once( ABSPATH . '/wp-includes/PHPMailer/PHPMailerAutoload.php' );
+require_once( ABSPATH . '/wp-includes/class-phpmailer.php' );
 
 class MockPHPMailer extends PHPMailer {
 	var $mock_sent = array();
