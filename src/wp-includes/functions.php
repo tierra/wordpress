@@ -1307,7 +1307,7 @@ function wp_get_referer() {
 	else if ( ! empty( $_SERVER['HTTP_REFERER'] ) )
 		$ref = wp_unslash( $_SERVER['HTTP_REFERER'] );
 
-	if ( $ref && $ref !== wp_unslash( $_SERVER['REQUEST_URI'] ) )
+	if ( $ref && $ref !== get_site_url() . wp_unslash( $_SERVER['REQUEST_URI'] ) )
 		return wp_validate_redirect( $ref, false );
 	return false;
 }
