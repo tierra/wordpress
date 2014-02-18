@@ -570,10 +570,6 @@ class PHPMailer
     public function __construct($exceptions = false)
     {
         $this->exceptions = ($exceptions == true);
-        //Make sure our autoloader is loaded
-        if (!in_array('PHPMailerAutoload', spl_autoload_functions())) {
-            require 'PHPMailerAutoload.php';
-        }
     }
 
     /**
@@ -1139,6 +1135,7 @@ class PHPMailer
     public function getSMTPInstance()
     {
         if (!is_object($this->smtp)) {
+            require_once 'class-smtp.php';
             $this->smtp = new SMTP;
         }
         return $this->smtp;
