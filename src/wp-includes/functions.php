@@ -1197,6 +1197,9 @@ function is_blog_installed() {
  * @return string Escaped URL with nonce action added.
  */
 function wp_nonce_url( $actionurl, $action = -1, $name = '_wpnonce' ) {
+	if ( -1 == $action )
+		_doing_it_wrong( __FUNCTION__, __( 'You should specify a nonce action as the second parameter.' ), '3.9' );
+
 	$actionurl = str_replace( '&amp;', '&', $actionurl );
 	return esc_html( add_query_arg( $name, wp_create_nonce( $action ), $actionurl ) );
 }
@@ -1230,6 +1233,9 @@ function wp_nonce_url( $actionurl, $action = -1, $name = '_wpnonce' ) {
  * @return string Nonce field.
  */
 function wp_nonce_field( $action = -1, $name = "_wpnonce", $referer = true , $echo = true ) {
+	if ( -1 == $action )
+		_doing_it_wrong( __FUNCTION__, __( 'You should specify a nonce action as the first parameter.' ), '3.9' );
+
 	$name = esc_attr( $name );
 	$nonce_field = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="' . wp_create_nonce( $action ) . '" />';
 
