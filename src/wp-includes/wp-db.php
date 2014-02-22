@@ -1366,7 +1366,7 @@ class wpdb {
 		}
 
 		// If there is an error then take note of it..
-		if ( $this->last_error = mysql_error( $this->dbh ) ) {
+		if ( $this->last_error ) {
 			// Clear insert_id on a subsequent failed insert.
 			if ( $this->insert_id && preg_match( '/^\s*(insert|replace)\s/i', $query ) )
 				$this->insert_id = 0;
@@ -1419,8 +1419,11 @@ class wpdb {
 		$this->result = @mysql_query( $query, $this->dbh );
 		$this->num_queries++;
 
+		$this->last_error = mysql_error( $this->dbh );
+
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-			$this->queries[] = array( $query, $this->timer_stop(), $this->get_caller() );
+			$this->queries[] = array( $query, $this->timer_stop(),
+			                          $this->get_caller(), $this->last_error );
 		}
 	}
 
