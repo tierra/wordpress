@@ -36,6 +36,10 @@ wp-tests-config.php
 /src/wp-content/object-cache.php
 /src/wp-content/sunrise.php
 
+# Do not ignore intentional files in plugins
+!/src/wp-content/plugins/index.php
+!/src/wp-content/plugins/hello.php
+
 # Do not ignore "twenty*" themes
 !/src/wp-content/themes/twenty*
 
